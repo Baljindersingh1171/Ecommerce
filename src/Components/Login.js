@@ -4,8 +4,7 @@ import "../signup.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ContinueWithgoogle from './ContinueWithgoogle'
-import { auth } from '../firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+
 import closedEye from "../assests/images/closedeye.png"
 import openEye from "../assests/images/openeye.png"
 
@@ -40,15 +39,16 @@ export default function Login() {
 
     }else {
       try{
-       const data= await signInWithEmailAndPassword(auth,formData.email,formData.password);
-       console.log("data",data);
+      //  const data= await signInWithEmailAndPassword(auth,formData.email,formData.password);
+      //  console.log("data",data);
     
         toast.success("Login Successfully");
  
 
 
 
-        navigate('/home',{ state: { displayName: data?.user?.displayName } })
+        // navigate('/home',{ state: { displayName: data?.user?.displayName } })
+        navigate('/home')
 
     
 

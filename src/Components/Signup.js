@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import "../signup.css";
 import { toast } from 'react-toastify';
 import {  Link } from "react-router-dom";
-import  {auth}from '../firebase';
-import {  updateProfile } from "firebase/auth";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+
 import ContinueWithgoogle from './ContinueWithgoogle';
 import closedEye from "../assests/images/closedeye.png"
 import openEye from "../assests/images/openeye.png"
 import Buttons from './Buttons';
+import { signup } from '../apis/apis';
 export default function Signup() {
   const[formData,setFormData]=useState({
     username:"",
@@ -87,13 +87,20 @@ let indiaRegex=/^[7-9]{1}[0-9]{9}$/;
     else{
       try{
      
-        await createUserWithEmailAndPassword(auth,formData.email,formData.password);
-        await updateProfile(auth.currentUser,{displayName:formData?.username})
+        // await createUserWithEmailAndPassword(auth,formData.email,formData.password);
+        // await updateProfile(auth.currentUser,{displayName:formData?.username})
+      const result=  await signup(formData.username,formData.email,formData.phoneno,formData.confirmpassword);
+      console.log("result",result);
+      if(result)
+      {
+        
         toast.success("Account is created Successfully");
+      }
     
       }
       catch(err){
-        toast.error(err.message);
+        // toast.error(err.message);
+        console.log(err);
     
       }
     setFormData({ username:"",

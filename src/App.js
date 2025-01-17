@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './Components/Login';
 import Home from "./Components/Home";
 import ResetPassword from "./Components/ResetPassword";
-
+import "./main.css"
+import Buynow from "./Components/Buynow";
 function App() {
   return (
     <div >
@@ -16,6 +17,7 @@ function App() {
     <Route path="/login" element={<Login/>}/>
     <Route path="/signup" element={<Signup/>} />
     <Route path="/ResetPassword" element={<ResetPassword/>}/>
+    <Route path="/Buynow" element={<Buynow/>}/>
     
     </Routes>
     </BrowserRouter>
