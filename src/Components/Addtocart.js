@@ -101,7 +101,7 @@ export default function Addtocart() {
     <div className=' flex flex-col gap-[25px]  pt-[100px] w-[450px] text-2xl'>
     <div className='font-bold'>{product.title}</div>
 
-      {product.productid===currentid?<div className='overflow-y-scroll h-[200px]' ><span className='font-bold'>Description:-</span>{product.description}</div>:<div ><span className='font-bold'>Description:-</span>{product.description.slice(0,80)}</div>}
+      {product.productid===currentid?<div className='' ><span className='font-bold'>Description:-</span>{product.description}</div>:<div ><span className='font-bold'>Description:-</span>{product.description.slice(0,80)}</div>}
     <Buttons onClick={()=>handleShowMore(product.productid)} productid={product.productid} id={currentid} className='text-blue-600'/>
   <Rating rating={product.rating?.rate} className="flex cursor-pointer"/>  
   
