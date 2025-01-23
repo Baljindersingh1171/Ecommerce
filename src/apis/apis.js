@@ -32,10 +32,58 @@ export const login=async({username,password})=>{
 export const getProducts=async()=>{
     const result=await axios.get('https://fakestoreapi.com/products');
     
-    console.log(result);
+    // console.log(result);
     return result;
 }
 export const getProduct=async(id)=>{
     const result=await axios.get(`https://fakestoreapi.com/products/${id}`);
     return result;
+}
+export const getProductsByCategory=async(category)=>{
+    const result =await axios.get(`https://fakestoreapi.com/products/category/${category}`);
+    return result;
+}
+export const addToCart=async(id,title,price,image)=>{
+    try{
+        const response=await axios.post(`http://localhost:3000/products`,{
+            productid:id,
+            title:title,
+            price:price,
+            image:image
+
+
+        })
+        return response;
+
+    }
+    catch(err){
+        throw(err);
+
+    }
+
+}
+export const getCartProducts=async()=>{
+    try{
+        const response=await axios.get(`http://localhost:3000/products`);
+        return response;
+       
+        
+    }
+    catch(err)
+    {
+        throw(err);
+
+    }
+
+}
+export const deleteCartProduct=async(id)=>{
+    try{
+        const response=await axios.delete(`http://localhost:3000/products/${id}`);
+        return response;
+
+    }
+    catch(err)
+    {
+        throw(err)
+    }
 }
