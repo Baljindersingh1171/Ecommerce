@@ -1,32 +1,46 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaCirclePlus,FaCircleMinus } from "react-icons/fa6";
 import { ImCross } from "react-icons/im";
-import { deleteCartProduct, getCartProducts } from '../apis/apis';
+import { deleteCartProduct, getCartProducts, updateCartData } from '../apis/apis';
 
 
 
-export default function Quantityprice({price,id,setCartProducts}) {
+
+export default function Quantityprice({price,id,setCartProducts,quantity,display}) {
     const [count , setCount] = useState(1)
     console.log("productid",id);
   
     const[total,setTotal]=useState('');
+    
+    const update=async()=>{
+    await updateCartData(count,id);
+
+     await  display();
    
-    function handleIncrement(){
-       
-        setCount(count + 1);
-        console.log("count",count)
-        setTotal(price*(count+1));
-        console.log("price")
-     
-  
-       
+
+
     }
-    function handleDecrement(){
+    console.log("quantity",quantity);
+   
+   function handleIncrement (){
+        setCount(count+1);
+        setTotal(price*(count+1));
+      update()
+      }
+
+    //   useEffect(()=> {
+    //     update();
+    // }, [count])
+    
+    console.log("count outside",count);
+    function handleDecrement (){
+
         if(count>1)
         {
         setCount(count - 1);
         setTotal(price*(count-1))
         }
+       update();
     }
     const handleDelete=async(myid)=>{
       try{
@@ -55,7 +69,7 @@ export default function Quantityprice({price,id,setCartProducts}) {
     <div onClick={handleDecrement}>
     <FaCircleMinus  />
     </div>  
-    <div>{count}</div>
+    <div>{quantity}</div>
     <div onClick={handleIncrement}>
     <FaCirclePlus/>
     </div>

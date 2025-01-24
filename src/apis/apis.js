@@ -43,13 +43,16 @@ export const getProductsByCategory=async(category)=>{
     const result =await axios.get(`https://fakestoreapi.com/products/category/${category}`);
     return result;
 }
-export const addToCart=async(id,title,price,image)=>{
+export const addToCart=async(id,title,price,image,quantity)=>{
     try{
         const response=await axios.post(`http://localhost:3000/products`,{
             productid:id,
             title:title,
             price:price,
-            image:image
+            image:image,
+            totalprice:price,
+            quantity:quantity
+
 
 
         })
@@ -85,5 +88,19 @@ export const deleteCartProduct=async(id)=>{
     catch(err)
     {
         throw(err)
+    }
+}
+export const updateCartData=async(count,id)=>{
+    try{
+        await axios.patch(`http://localhost:3000/products/${id}`,{
+            quantity:count
+
+        })
+
+    }
+    catch(err)
+    {
+        throw(err);
+
     }
 }

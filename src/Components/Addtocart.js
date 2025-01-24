@@ -28,11 +28,12 @@ export default function Addtocart() {
         display();
 
     },[])
+    const quantity=1;
     const handleClick=async()=>
     {
   
     try{
-        await addToCart(product.id,product.title,product.price,product.image);
+        await addToCart(product.id,product.title,product.price,product.image,quantity);
         toast.success("Product is added successfully")
         navigate("/Cart")
     }
@@ -65,7 +66,7 @@ export default function Addtocart() {
 
   return (
     <>
-    <Nav/>
+   
     {!isLoading?<div className='flex justify-around   '>
       <div className='  ml-[100px] mt-[100px]'>
       <ReactImageMagnify

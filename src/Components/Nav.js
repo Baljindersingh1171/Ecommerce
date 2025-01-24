@@ -4,16 +4,19 @@ import { Link } from 'react-router-dom'
 import {  useNavigate } from 'react-router-dom'
 import "../home.css"
 import cart from "../assests/images/cart.png"
+import Searchbar from './Searchbar'
 
 
 
-export default function Nav() {
+
+export default function Nav({filteredData,setFilteredData}) {
   const navigate=useNavigate()
 
   const handleClick=()=>{
     navigate("/login")
-
   }
+
+ 
 
   return (
     <div className='flex items-center justify-between px-6 bg-black h-[65px] fixed top-0 right-0 left-0 z-50'>
@@ -23,6 +26,9 @@ export default function Nav() {
     <Link className='text-white'to='/Womens'>Womens</Link>
     <Link className='text-white' to='/Electronics'>Electronics</Link>
     <Link className='text-white' to="/Jeweleries">Jeweleries</Link>
+    <Searchbar filteredData={filteredData} setFilteredData={setFilteredData}/>
+  
+  
     </div>
 
   <div className='flex gap-[50px]'>

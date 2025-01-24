@@ -5,24 +5,25 @@ import Nav from './Nav';
 
 import { useNavigate } from 'react-router-dom'
 
-
 import Quantityprice from './Quantityprice';
-
-
-
 
 export default function Cart() {
 
   const navigate=useNavigate();
    
  const[cartProducts,setCartProducts]=useState([]);
-     useEffect(()=>{
-        const display=async()=>{
-            const result=await getCartProducts();
-            setCartProducts(result.data);
-            console.log("cart products",result)
+ console.log("cartProducts",cartProducts);
+ console.log(cartProducts.quantity,"cart product quantity");
 
-        }
+ const display=async()=>{
+  const result=await getCartProducts();
+  console.log("result",result);
+  setCartProducts(result.data);
+ 
+
+}
+     useEffect(()=>{
+
         display();
        
      },[])
@@ -35,7 +36,7 @@ export default function Cart() {
 
   return (
     <div>
-    <Nav/>
+  
     <div className=' flex justify-center items-center mt-[100px] ' >
   
  
@@ -57,7 +58,7 @@ export default function Cart() {
                   <td className=' pl-[60px]  my-4'>{product.price}$</td>
                   <td className='  pl-[70px]  mt-4'>
 
-                    <Quantityprice price={product.price} id={product.id} setCartProducts={setCartProducts} />
+                    <Quantityprice price={product.price} id={product.id} setCartProducts={setCartProducts} quantity={product.quantity} display={display}/>
 
                   </td>
 
