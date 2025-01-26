@@ -1,18 +1,8 @@
-
-import Products from './Products';
-export default function Home({filteredData}) {
-  
+import Products from "./Products";
+export default function Home() {
   return (
     <div>
-  
-    
-    <Products filteredData={filteredData}/>
+      <Products />
     </div>
-
-  )
+  );
 }
-
-
-
-
-  

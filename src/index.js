@@ -1,15 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Filterdataprovider } from "./Context/FilteredData";
+import { CartBadgeProvider } from "./Context/CartBadge";
 
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
- 
-    <App />
- 
+  <>
+    <CartBadgeProvider>
+      <Filterdataprovider>
+        <App />
+      </Filterdataprovider>
+    </CartBadgeProvider>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function

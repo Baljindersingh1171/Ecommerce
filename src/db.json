@@ -1,24 +1,34 @@
 {
   "products": [
     {
-      "id": "86ef",
-      "productid": 8,
-      "title": "Pierced Owl Rose Gold Plated Stainless Steel Double",
-      "price": 10.99,
-      "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-      "quantity": 11
-    },
-    {
-      "id": "0002",
-      "productid": 8,
-      "title": "Pierced Owl Rose Gold Plated Stainless Steel Double",
-      "price": 10.99,
-      "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-      "totalprice": 10.99,
+      "id": "a9ca",
+      "productid": 11,
+      "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+      "price": 109,
+      "image": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+      "totalprice": 109,
       "quantity": 1
     },
     {
-      "id": "4b8d",
+      "id": "1cd9",
+      "productid": 11,
+      "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+      "price": 109,
+      "image": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+      "totalprice": 109,
+      "quantity": 1
+    },
+    {
+      "id": "bf78",
+      "productid": 10,
+      "title": "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
+      "price": 109,
+      "image": "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
+      "totalprice": 109,
+      "quantity": 1
+    },
+    {
+      "id": "178d",
       "productid": 2,
       "title": "Mens Casual Premium Slim Fit T-Shirts ",
       "price": 22.3,
@@ -27,13 +37,28 @@
       "quantity": 1
     },
     {
-      "id": "1e64",
-      "productid": 4,
-      "title": "Mens Casual Slim Fit",
-      "price": 15.99,
-      "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-      "totalprice": 15.99,
+      "id": "f0e6",
+      "productid": 10,
+      "title": "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
+      "price": 109,
+      "image": "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
+      "totalprice": 109,
+      "quantity": 1
+    },
+    {
+      "id": "6522",
+      "productid": 2,
+      "title": "Mens Casual Premium Slim Fit T-Shirts ",
+      "price": 22.3,
+      "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+      "totalprice": 22.3,
       "quantity": 1
     }
-  ]
+  ],
+  "cartBadge": {
+    "item": {
+      "cartBadge": 2
+    },
+    "cartBadge": 1
+  }
 }
