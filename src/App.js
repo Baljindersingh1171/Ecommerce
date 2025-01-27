@@ -11,11 +11,28 @@ import Getbycategory from "./Components/Getbycategory";
 import Cart from "./Components/Cart";
 import Addtocart from "./Components/Addtocart";
 import Nav from "./Components/Nav";
+import { useEffect } from "react";
+import { getCartProducts } from "./apis/apis";
+
+import { useContext } from "react";
+import { CartBadgeContext } from "./Context/CartBadge";
 function App() {
   const mensClothCategory = "men's clothing";
   const womenCLothCategory = "women's clothing";
   const electronicsCategory = "electronics";
   const JeweleriesCategory = "jewelery";
+   const badge = useContext(CartBadgeContext)
+  useEffect(()=>{
+    const display=async()=>{
+     const result=  await getCartProducts();
+     const totalCartItems= result.data.reduce((acc, currentvalue) => acc + currentvalue.quantity, 0);
+     badge.setCartBadge(totalCartItems);
+    }
+    display();
+
+    },[])
+    
+
 
   return (
     <div>

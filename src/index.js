@@ -4,13 +4,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Filterdataprovider } from "./Context/FilteredData";
 import { CartBadgeProvider } from "./Context/CartBadge";
+import { SearchedProvider } from "./Context/SearchedProduct";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
     <CartBadgeProvider>
       <Filterdataprovider>
+      <SearchedProvider>
         <App />
+        </SearchedProvider>
       </Filterdataprovider>
     </CartBadgeProvider>
   </>

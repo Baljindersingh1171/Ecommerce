@@ -3,12 +3,16 @@ import { CiSearch } from "react-icons/ci";
 import { getProducts } from "../apis/apis";
 import { useContext } from "react";
 import { Filterdatacontext } from "../Context/FilteredData";
+import { SearchedProductContext } from "../Context/SearchedProduct";
+
 export default function Searchbar() {
   const [allproducts, setAllProducts] = useState([]);
   const data = useContext(Filterdatacontext);
-  const filteredData = data.filteredData;
+    const input=useContext(SearchedProductContext)
+ 
+ 
 
-  const [searchedProduct, setSearchedProduct] = useState("");
+  // const [searchedProduct, setSearchedProduct] = useState("");
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -21,19 +25,17 @@ export default function Searchbar() {
 
   const handleSearchChange = (e) => {
     const searchValue = e.target.value;
-    setSearchedProduct(searchValue);
-
-    console.log("Before", searchValue);
-
+    // setSearchedProduct(searchValue);
+    input.setSearchedProduct(searchValue)
     data.setFilteredData(
       allproducts.filter((product) =>
         product.title.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
-  };
-  console.log("searched product", searchedProduct);
+ 
+  }
 
-  console.log("filtered data", filteredData);
+ 
 
   // setProducts(filteredProducts);
 
@@ -50,4 +52,5 @@ export default function Searchbar() {
       </div>
     </div>
   );
+
 }

@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { addToBadge, getProduct } from "../apis/apis";
+import { addToBadge, getCartProducts, getProduct, getProducts } from "../apis/apis";
 import ReactImageMagnify from "react-image-magnify";
 import Rating from "./Rating";
-import Nav from "./Nav";
 import Buttons from "./Buttons";
 import { addToCart } from "../apis/apis";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CartBadgeContext } from "../Context/CartBadge";
-export default function Addtocart({}) {
+export default function Addtocart() {
   const badge = useContext(CartBadgeContext);
-
-  const cartBadge = badge.cartBadge;
-
   const [product, setproduct] = useState("");
   const location = useLocation();
   const id = location.state || {};
@@ -34,6 +30,7 @@ export default function Addtocart({}) {
   }, []);
   const quantity = 1;
 
+
   const handleClick = async () => {
     try {
       await addToCart(
@@ -44,8 +41,10 @@ export default function Addtocart({}) {
         quantity
       );
 
-      await addToBadge(cartBadge);
-      badge.setCartBadge(cartBadge + 1);
+      // await addToBadge(cartBadge);
+      const cartProducts=await getCartProducts();
+      // console.log("products",cartProducts.data.length)
+      
       toast.success("Product is added successfully");
       navigate("/Cart");
     } catch (err) {

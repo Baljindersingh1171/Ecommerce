@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
@@ -11,10 +11,28 @@ import { CartBadgeContext } from "../Context/CartBadge";
 export default function Nav() {
   const navigate = useNavigate();
   const badge = useContext(CartBadgeContext);
-
   const cartBadge = badge.cartBadge;
 
+  console.log(badge);
+
+  // 
+  // let badgeResult;
+  // const Display=async()=>{
+  //   let result= await getBadge();
+  //   badgeResult=result?.data?.cartBadge;
+  //   console.log(badgeResult)
+
+  // }
+
+  
+  //  useEffect(()=>{
+  //   Display();
+
+  //  },[badge])
+ 
+
   const handleClick = () => {
+    
     navigate("/login");
   };
 
@@ -43,7 +61,8 @@ export default function Nav() {
         <Link className="cursor-pointer relative" to="/Cart">
           <img src={cart} alt="cart" class="h-[45px]" />
           <span class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold rounded-full h-[20px] w-[20px] flex items-center justify-center">
-            {cartBadge}
+          {cartBadge}
+        
           </span>
         </Link>
 

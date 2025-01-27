@@ -4,16 +4,22 @@ import { getCartProducts } from "../apis/apis";
 import Nav from "./Nav";
 import { useNavigate } from "react-router-dom";
 import Quantityprice from "./Quantityprice";
+import { useContext } from "react";
+import { CartBadgeContext } from "../Context/CartBadge";
 
 export default function Cart() {
   const navigate = useNavigate();
 
   const [cartProducts, setCartProducts] = useState([]);
+    const badge = useContext(CartBadgeContext);
   console.log("cartProducts", cartProducts);
   console.log(cartProducts.quantity, "cart product quantity");
 
+
   const display = async () => {
     const result = await getCartProducts();
+   const totalCartItems= result.data.reduce((acc, currentvalue) => acc + currentvalue.quantity, 0);
+   badge.setCartBadge(totalCartItems);
     console.log("result", result);
     setCartProducts(result.data);
   };

@@ -53,15 +53,26 @@ export const addToCart = async (id, title, price, image, quantity) => {
     throw err;
   }
 };
-export const addToBadge = async (cartBadge) => {
-  try {
-    await axios.patch(`http://localhost:3000/cartBadge`, {
-      cartBadge: cartBadge + 1,
-    });
-  } catch (err) {
-    throw err;
-  }
-};
+// export const addToBadge = async (cartBadge) => {
+//   console.log(cartBadge, "cartbade");
+//   try {
+//     await axios.patch(`http://localhost:3000/cartBadge/908`, {
+//       cartBadge: cartBadge+1 ,
+//     });
+//   } catch (err) {
+//     throw err;
+//   }
+// };
+// export const getBadge=async()=>{
+//   try{
+//     const result=await axios.get(`http://localhost:3000/cartBadge`)
+
+//     return result
+//   }
+//   catch(err){
+//     throw(err)
+//   }
+// }
 export const getCartProducts = async () => {
   try {
     const response = await axios.get(`http://localhost:3000/products`);

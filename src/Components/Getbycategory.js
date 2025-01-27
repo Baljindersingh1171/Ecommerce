@@ -6,6 +6,7 @@ import { getProductsByCategory } from "../apis/apis";
 import Productcard from "./Productcard";
 import { useContext } from "react";
 import { Filterdatacontext } from "../Context/FilteredData";
+import { SearchedProductContext } from "../Context/SearchedProduct";
 
 export default function Getbycategory({ category }) {
   const [data, setData] = useState([]);
@@ -13,6 +14,7 @@ export default function Getbycategory({ category }) {
   const Data = useContext(Filterdatacontext);
   const filteredData = Data.filteredData;
   console.log("filtered data in category", filteredData);
+  const input=useContext(SearchedProductContext)
 
   useEffect(() => {
     const display = async () => {
@@ -33,14 +35,25 @@ export default function Getbycategory({ category }) {
 
     display();
   }, [category, filteredData]);
+  if(filteredData.length===0)
+    {
+    if(input.searchedProduct!==0)
+    {
+      return <p className="flex justify-center items-center mt-[250px] font-bold text-xl">No Product Found</p>
+    }
+    else{
+      return <p className="flex justify-center items-center mt-[250px] font-bold text-xl">Loading...</p>
+    }
+    }
+    else{
+  
 
   console.log("data", data);
 
   return (
     <div>
       <div className="flex ml-[100px] gap-[30px] flex-wrap mt-[100px]">
-        {!isLoading ? (
-          data.length > 0 ? (
+        {(
             data.map((product) => (
               <Productcard
                 productid={product.id}
@@ -50,15 +63,9 @@ export default function Getbycategory({ category }) {
                 title={product.title}
               />
             ))
-          ) : (
-            <p className="ml-[600px] mt-[60px] text-xl font-bold">
-              No products found
-            </p>
-          )
-        ) : (
-          <p>Loading...</p>
-        )}
+          ) }
       </div>
     </div>
   );
+}
 }

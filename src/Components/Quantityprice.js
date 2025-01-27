@@ -21,31 +21,28 @@ export default function Quantityprice({
   const badge = useContext(CartBadgeContext);
   const cartBadge = badge.cartBadge;
   const update = async () => {
+    
     await updateCartData(count, id, total, cartBadge);
     await display();
   };
   console.log("quantity of product", quantity);
 
   function handleIncrement() {
+
     setCount(quantity + 1);
-    badge.setCartBadge(cartBadge + 1);
     setTotal(price * (quantity + 1));
   }
 
   useEffect(() => {
+  
     update();
+  
   }, [count]);
-  useEffect(() => {
-    if (quantity) {
-      setCount(quantity);
-      setTotal(price * quantity);
-    }
-  }, [quantity, price]);
+
 
   function handleDecrement() {
     if (quantity > 1) {
       setCount(quantity - 1);
-      badge.setCartBadge(cartBadge - 1);
       setTotal(price * (quantity - 1));
     }
   }
@@ -53,6 +50,8 @@ export default function Quantityprice({
     try {
       await deleteCartProduct(myid);
       const result = await getCartProducts();
+      const totalCartItems= result.data.reduce((acc, currentvalue) => acc + currentvalue.quantity, 0);
+   badge.setCartBadge(totalCartItems);
       setCartProducts(result.data);
     } catch (err) {
       throw err;
