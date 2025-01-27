@@ -20,6 +20,7 @@ export default function Quantityprice({
   const [total, setTotal] = useState(price);
   const badge = useContext(CartBadgeContext);
   const cartBadge = badge.cartBadge;
+  const[isClicked,setIsClicked]=useState(false);
   const update = async () => {
     
     await updateCartData(count, id, total, cartBadge);
@@ -28,20 +29,25 @@ export default function Quantityprice({
   console.log("quantity of product", quantity);
 
   function handleIncrement() {
+    setIsClicked(true);
 
     setCount(quantity + 1);
     setTotal(price * (quantity + 1));
   }
 
   useEffect(() => {
+    if(isClicked)
+    {
   
     update();
+    }
   
   }, [count]);
 
 
   function handleDecrement() {
     if (quantity > 1) {
+      setIsClicked(true);
       setCount(quantity - 1);
       setTotal(price * (quantity - 1));
     }
