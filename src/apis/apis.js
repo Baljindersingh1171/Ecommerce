@@ -89,7 +89,7 @@ export const deleteCartProduct = async (id) => {
     throw err;
   }
 };
-export const updateCartData = async (count, id, total, cartBadge) => {
+export const updateCartData = async (count, id, total) => {
   try {
     await axios.patch(`http://localhost:3000/products/${id}`, {
       quantity: count,

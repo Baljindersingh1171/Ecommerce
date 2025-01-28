@@ -12,7 +12,7 @@ root.render(
     <CartBadgeProvider>
       <Filterdataprovider>
       <SearchedProvider>
-        <App />
+       <App />
         </SearchedProvider>
       </Filterdataprovider>
     </CartBadgeProvider>

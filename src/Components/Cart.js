@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Quantityprice from "./Quantityprice";
 import { useContext } from "react";
 import { CartBadgeContext } from "../Context/CartBadge";
+import { Button } from "@fluentui/react-components";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -14,11 +15,15 @@ export default function Cart() {
     const badge = useContext(CartBadgeContext);
   console.log("cartProducts", cartProducts);
   console.log(cartProducts.quantity, "cart product quantity");
+  const[subTotal,setSubTotal]=useState(null);
 
 
   const display = async () => {
     const result = await getCartProducts();
    const totalCartItems= result.data.reduce((acc, currentvalue) => acc + currentvalue.quantity, 0);
+   const SubtotalPrice=result.data.reduce((acc,currentvalue)=>acc+currentvalue.totalprice,0)
+   setSubTotal(SubtotalPrice);
+console.log("subtotalprice",subTotal)
    badge.setCartBadge(totalCartItems);
     console.log("result", result);
     setCartProducts(result.data);
@@ -26,13 +31,15 @@ export default function Cart() {
   useEffect(() => {
     display();
   }, []);
+  console.log("cartProducts length",cartProducts.length)
+  console.log("cart products",cartProducts)
 
   return (
-    <div>
-      <div className=" flex justify-center items-center mt-[100px] ">
-        {cartProducts.length > 0 ? (
+    <div className="">
+      {cartProducts.length!==0?(<div className=" flex justify-center flex-col items-center mt-[100px] gap-[50px] border-b-[3px]  border-gray-500 w-[900px] pb-4 mx-auto pr-[70px]">
+       
           <>
-            <table className="table-auto text-[24px]">
+            <table className="table-auto text-[24px]  ">
               <thead>
                 <tr className="">
                   <th className="">ITEM</th>
@@ -54,27 +61,37 @@ export default function Cart() {
                         <img src={product.image} alt="" className="w-6" />
                         {product?.title?.slice(0, 20)}
                       </td>
-                      <td className=" pl-[60px]  my-4">{product.price}$</td>
-                      <td className="  pl-[70px]  mt-4">
+                      <td className=" pl-[60px]  my-4 ">{product.price}$</td>
+                      <td className="  pl-[70px]  mt-4 ">
                         <Quantityprice
+                          totalprice={product.totalprice}
                           price={product.price}
                           id={product.id}
                           setCartProducts={setCartProducts}
                           quantity={product.quantity}
                           display={display}
+                         
                         />
                       </td>
                     </tr>
+                   
                   </>
                 ))}
               </tbody>
             </table>
-            <table></table>
           </>
-        ) : (
-          "No Products "
-        )}
-      </div>
+       
+      </div>   ):<div className=" mt-[150px] flex justify-center font-bold text-xl">No Products</div>
+    }
+   {cartProducts.length>0&&<div className="flex justify-center items-center gap-[100px] mt-[20px] ">
+    <div className="font-bold text-[25px]"> TOTAL PRICE:</div> 
+    <div className="font-bold ">--------------------------------</div>
+    
+    <div className="font-bold text-[25px]">{subTotal}$</div>
+
+ 
+      </div>} 
+
     </div>
   );
 }
