@@ -7,6 +7,8 @@ import Quantityprice from "./Quantityprice";
 import { useContext } from "react";
 import { CartBadgeContext } from "../Context/CartBadge";
 import { Button } from "@fluentui/react-components";
+import Buttons from "./Buttons";
+
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ console.log("subtotalprice",subTotal)
   }, []);
   console.log("cartProducts length",cartProducts.length)
   console.log("cart products",cartProducts)
+  
 
   return (
     <div className="">
@@ -83,14 +86,19 @@ console.log("subtotalprice",subTotal)
        
       </div>   ):<div className=" mt-[150px] flex justify-center font-bold text-xl">No Products</div>
     }
-   {cartProducts.length>0&&<div className="flex justify-center items-center gap-[100px] mt-[20px] ">
+   {cartProducts.length>0&&<div className="flex justify-center items-center gap-[50px]  mt-[20px] ">
     <div className="font-bold text-[25px]"> TOTAL PRICE:</div> 
-    <div className="font-bold ">--------------------------------</div>
-    
-    <div className="font-bold text-[25px]">{subTotal}$</div>
-
+   
+    <div className="font-bold ">------------------------------------</div>
+    <div className="flex justify-center items-center gap-[100px]">
+    <div className="font-bold text-[25px]">{Math.round(subTotal)}$</div>
+    <Buttons className="bg-[#fbbf24] text-black p-[10px] h-[40px]  rounded-md" text="Proceed to buy" onClick={handleClick}/>
+    </div>
+  
  
-      </div>} 
+    </div>
+
+      } 
 
     </div>
   );

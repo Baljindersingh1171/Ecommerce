@@ -57,10 +57,8 @@ export default function Quantityprice({
   const handleDelete = async (myid) => {
     try {
       await deleteCartProduct(myid);
-      const result = await getCartProducts();
-      const totalCartItems= result.data.reduce((acc, currentvalue) => acc + currentvalue.quantity, 0);
-   badge.setCartBadge(totalCartItems);
-      setCartProducts(result.data);
+      await display();
+    
     } catch (err) {
       throw err;
     }
@@ -75,7 +73,7 @@ export default function Quantityprice({
       <div onClick={handleIncrement}>
         <FaCirclePlus />
       </div>
-      <div className="ml-[30px] absolute left-[166px]  ">{totalprice}$</div>
+      <div className="ml-[30px] absolute left-[166px]  ">{Math.round(totalprice)}$</div>
       <div
         className="absolute left-[300px] cursor-pointer "
         onClick={() => handleDelete(id)}

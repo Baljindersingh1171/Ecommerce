@@ -1,12 +1,21 @@
 {
   "products": [
     {
-      "id": "5095",
-      "productid": 4,
-      "title": "Mens Casual Slim Fit",
-      "price": 15.99,
-      "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-      "totalprice": 15.99,
+      "id": "3bea",
+      "productid": 3,
+      "title": "Mens Cotton Jacket",
+      "price": 55.99,
+      "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+      "totalprice": 223.96,
+      "quantity": 4
+    },
+    {
+      "id": "d365",
+      "productid": 8,
+      "title": "Pierced Owl Rose Gold Plated Stainless Steel Double",
+      "price": 10.99,
+      "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
+      "totalprice": 10.99,
       "quantity": 1
     }
   ]
