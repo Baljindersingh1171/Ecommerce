@@ -1,14 +1,11 @@
 import axios from "axios";
-export const signup = async (username, email, phoneno, confirmpassword) => {
+export const signup = async (username, confirmpassword) => {
   try {
     const result = await axios.post(
-      "https://3f4d-2401-4900-1c71-13fc-a0ad-8e89-90af-e998.ngrok-free.app/register",
+      "https://d324-2401-4900-1c70-501a-9691-1c54-de95-feae.ngrok-free.app/register",
       {
         username: username,
-        email: email,
-        phoneNo: phoneno,
         password: confirmpassword,
-        name: "baljinder",
       }
     );
     console.log(result);
@@ -38,15 +35,24 @@ export const getProductsByCategory = async (category) => {
   );
   return result;
 };
-export const addToCart = async (id, title, price, image, quantity) => {
+export const addToCart = async (
+  productid,
+  title,
+  price,
+  image,
+  quantity,
+  category
+) => {
+  console.log("productid", productid);
   try {
     const response = await axios.post(`http://localhost:3000/products`, {
-      productid: id,
+      productid: productid,
       title: title,
       price: price,
       image: image,
       totalprice: price,
       quantity: quantity,
+      category: category,
     });
     return response;
   } catch (err) {

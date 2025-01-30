@@ -9,38 +9,40 @@ import { CartBadgeContext } from "../Context/CartBadge";
 import { Button } from "@fluentui/react-components";
 import Buttons from "./Buttons";
 
-
 export default function Cart() {
   const navigate = useNavigate();
 
   const [cartProducts, setCartProducts] = useState([]);
-    const badge = useContext(CartBadgeContext);
+  const badge = useContext(CartBadgeContext);
   console.log("cartProducts", cartProducts);
   console.log(cartProducts.quantity, "cart product quantity");
-  const[subTotal,setSubTotal]=useState(null);
-
+  const [subTotal, setSubTotal] = useState(null);
 
   const display = async () => {
     const result = await getCartProducts();
-   const totalCartItems= result.data.reduce((acc, currentvalue) => acc + currentvalue.quantity, 0);
-   const SubtotalPrice=result.data.reduce((acc,currentvalue)=>acc+currentvalue.totalprice,0)
-   setSubTotal(SubtotalPrice);
-console.log("subtotalprice",subTotal)
-   badge.setCartBadge(totalCartItems);
+    const totalCartItems = result.data.reduce(
+      (acc, currentvalue) => acc + currentvalue.quantity,
+      0
+    );
+    const SubtotalPrice = result.data.reduce(
+      (acc, currentvalue) => acc + currentvalue.totalprice,
+      0
+    );
+    setSubTotal(SubtotalPrice);
+    console.log("subtotalprice", subTotal);
+    badge.setCartBadge(totalCartItems);
     console.log("result", result);
     setCartProducts(result.data);
   };
   useEffect(() => {
     display();
   }, []);
-  console.log("cartProducts length",cartProducts.length)
-  console.log("cart products",cartProducts)
-  
+  function handleClick() {}
 
   return (
     <div className="">
-      {cartProducts.length!==0?(<div className=" flex justify-center flex-col items-center mt-[100px] gap-[50px] border-b-[3px]  border-gray-500 w-[900px] pb-4 mx-auto pr-[70px]">
-       
+      {cartProducts.length !== 0 ? (
+        <div className=" flex justify-center flex-col items-center mt-[100px] gap-[50px] border-b-[3px]  border-gray-500 w-[900px] pb-4 mx-auto pr-[70px]">
           <>
             <table className="table-auto text-[24px]  ">
               <thead>
@@ -73,33 +75,34 @@ console.log("subtotalprice",subTotal)
                           setCartProducts={setCartProducts}
                           quantity={product.quantity}
                           display={display}
-                         
                         />
                       </td>
                     </tr>
-                   
                   </>
                 ))}
               </tbody>
             </table>
           </>
-       
-      </div>   ):<div className=" mt-[150px] flex justify-center font-bold text-xl">No Products</div>
-    }
-   {cartProducts.length>0&&<div className="flex justify-center items-center gap-[50px]  mt-[20px] ">
-    <div className="font-bold text-[25px]"> TOTAL PRICE:</div> 
-   
-    <div className="font-bold ">------------------------------------</div>
-    <div className="flex justify-center items-center gap-[100px]">
-    <div className="font-bold text-[25px]">{Math.round(subTotal)}$</div>
-    <Buttons className="bg-[#fbbf24] text-black p-[10px] h-[40px]  rounded-md" text="Proceed to buy" onClick={handleClick}/>
-    </div>
-  
- 
-    </div>
-
-      } 
-
+        </div>
+      ) : (
+        <div className=" mt-[150px] flex justify-center font-bold text-xl">
+          No Products
+        </div>
+      )}
+      {cartProducts.length > 0 && (
+        <div className="flex justify-center items-center gap-[50px]  mt-[20px] ">
+          <div className="font-bold text-[25px]"> TOTAL PRICE:</div>
+          <div className="font-bold ">------------------------------------</div>
+          <div className="flex justify-center items-center gap-[100px]">
+            <div className="font-bold text-[25px]">{Math.round(subTotal)}$</div>
+            <Buttons
+              className="bg-[#fbbf24] text-black p-[10px] h-[40px]  rounded-md"
+              text="Proceed to buy"
+              onClick={handleClick}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

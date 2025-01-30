@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { addToBadge, getCartProducts, getProduct, getProducts } from "../apis/apis";
+import {
+  addToBadge,
+  getCartProducts,
+  getProduct,
+  getProducts,
+} from "../apis/apis";
 import ReactImageMagnify from "react-image-magnify";
 import Rating from "./Rating";
 import Buttons from "./Buttons";
@@ -13,15 +18,16 @@ export default function Addtocart() {
   const badge = useContext(CartBadgeContext);
   const [product, setproduct] = useState("");
   const location = useLocation();
-  const id = location.state || {};
+  const { productid, category } = location.state || {};
   const [isLoading, setIsLoading] = useState(true);
   const [currentid, setCurrentId] = useState("");
   const navigate = useNavigate();
-  console.log("id", id);
 
   useEffect(() => {
     const display = async () => {
-      const result = await getProduct(id);
+      console.log("productid", productid);
+      const result = await getProduct(productid);
+      console.log("getproduct", result.data);
       setproduct(result.data);
       setIsLoading(false);
       console.log("result", result.data);
@@ -30,7 +36,6 @@ export default function Addtocart() {
   }, []);
   const quantity = 1;
 
-
   const handleClick = async () => {
     try {
       await addToCart(
@@ -38,13 +43,14 @@ export default function Addtocart() {
         product.title,
         product.price,
         product.image,
-        quantity
+        quantity,
+        product.category
       );
 
       // await addToBadge(cartBadge);
-      const cartProducts=await getCartProducts();
+      const cartProducts = await getCartProducts();
       // console.log("products",cartProducts.data.length)
-      
+
       toast.success("Product is added successfully");
       navigate("/Cart");
     } catch (err) {
@@ -100,7 +106,7 @@ export default function Addtocart() {
             ) : (
               <div>
                 <span className="font-bold">Description:-</span>
-                {product.description.slice(0, 80)}
+                {product?.description?.slice(0, 80)}
               </div>
             )}
             <Buttons

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
-import "../home.css";
+
 import cart from "../assests/images/cart.png";
 import Searchbar from "./Searchbar";
 import { useContext } from "react";
@@ -15,7 +15,7 @@ export default function Nav() {
 
   console.log(badge);
 
-  // 
+  //
   // let badgeResult;
   // const Display=async()=>{
   //   let result= await getBadge();
@@ -24,20 +24,17 @@ export default function Nav() {
 
   // }
 
-  
   //  useEffect(()=>{
   //   Display();
 
   //  },[badge])
- 
 
   const handleClick = () => {
-    
     navigate("/login");
   };
 
   return (
-    <div className="flex items-center justify-between px-6 bg-black h-[65px] fixed top-0 right-0 left-0 z-50">
+    <div className="flex items-center justify-between px-6 bg-black h-[10vh] fixed top-0 right-0 left-0 z-50">
       <div className="flex gap-[30px] justify-center text-xl cursor-pointer">
         <Link className="text-white" to="/Home">
           Home
@@ -61,8 +58,7 @@ export default function Nav() {
         <Link className="cursor-pointer relative" to="/Cart">
           <img src={cart} alt="cart" class="h-[45px]" />
           <span class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold rounded-full h-[20px] w-[20px] flex items-center justify-center">
-          {cartBadge}
-        
+            {cartBadge}
           </span>
         </Link>
 
