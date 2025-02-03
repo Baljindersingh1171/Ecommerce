@@ -21,18 +21,19 @@ function App() {
   const womenCLothCategory = "women's clothing";
   const electronicsCategory = "electronics";
   const JeweleriesCategory = "jewelery";
-   const badge = useContext(CartBadgeContext)
-  useEffect(()=>{
-    const display=async()=>{
-     const result=  await getCartProducts();
-     const totalCartItems= result.data.reduce((acc, currentvalue) => acc + currentvalue.quantity, 0);
-     badge.setCartBadge(totalCartItems);
-    }
+  const badge = useContext(CartBadgeContext);
+  const [isChecked, setIsChecked] = useState(false);
+  useEffect(() => {
+    const display = async () => {
+      const result = await getCartProducts();
+      const totalCartItems = result.data.reduce(
+        (acc, currentvalue) => acc + currentvalue.quantity,
+        0
+      );
+      badge.setCartBadge(totalCartItems);
+    };
     display();
-
-    },[])
-    
-
+  }, []);
 
   return (
     <div>
@@ -46,23 +47,47 @@ function App() {
           <Route path="/Addtocart" element={<Addtocart />} />
           <Route
             path="/Mens"
-            element={<Getbycategory category={mensClothCategory} />}
+            element={
+              <Getbycategory
+                category={mensClothCategory}
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+              />
+            }
           />
           <Route
             path="/Womens"
-            element={<Getbycategory category={womenCLothCategory} />}
+            element={
+              <Getbycategory
+                category={womenCLothCategory}
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+              />
+            }
           />
           <Route
             path="/Electronics"
-            element={<Getbycategory category={electronicsCategory} />}
+            element={
+              <Getbycategory
+                category={electronicsCategory}
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+              />
+            }
           />
           <Route
             path="/Jeweleries"
-            element={<Getbycategory category={JeweleriesCategory} />}
+            element={
+              <Getbycategory
+                category={JeweleriesCategory}
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+              />
+            }
           />
           <Route path="/Cart" element={<Cart />} />
         </Routes>
-        <Nav />
+        <Nav isChecked={isChecked} setIsChecked={setIsChecked} />
       </BrowserRouter>
 
       <ToastContainer position="top-center" />

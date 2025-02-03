@@ -1,14 +1,3 @@
 {
-  "products": [
-    {
-      "id": "d919",
-      "productid": 8,
-      "title": "Pierced Owl Rose Gold Plated Stainless Steel Double",
-      "price": 10.99,
-      "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-      "totalprice": 10.99,
-      "quantity": 1,
-      "category": "jewelery"
-    }
-  ]
+  "products": []
 }

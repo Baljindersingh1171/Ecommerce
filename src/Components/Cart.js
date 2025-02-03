@@ -37,6 +37,7 @@ export default function Cart() {
   useEffect(() => {
     display();
   }, []);
+
   function handleClick() {}
 
   return (

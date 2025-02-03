@@ -5,37 +5,22 @@ import { useContext } from "react";
 import { Filterdatacontext } from "../Context/FilteredData";
 import { SearchedProductContext } from "../Context/SearchedProduct";
 
-export default function Searchbar() {
-  const [allproducts, setAllProducts] = useState([]);
+export default function Searchbar({ allproducts, getAllProducts }) {
+  const input = useContext(SearchedProductContext);
   const data = useContext(Filterdatacontext);
-    const input=useContext(SearchedProductContext)
- 
- 
 
   // const [searchedProduct, setSearchedProduct] = useState("");
-
-  useEffect(() => {
-    const getAllProducts = async () => {
-      const result = await getProducts();
-      data.setFilteredData(result.data);
-      setAllProducts(result.data);
-    };
-    getAllProducts();
-  }, []);
 
   const handleSearchChange = (e) => {
     const searchValue = e.target.value;
     // setSearchedProduct(searchValue);
-    input.setSearchedProduct(searchValue)
+    input.setSearchedProduct(searchValue);
     data.setFilteredData(
       allproducts.filter((product) =>
         product.title.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
- 
-  }
-
- 
+  };
 
   // setProducts(filteredProducts);
 
@@ -52,5 +37,4 @@ export default function Searchbar() {
       </div>
     </div>
   );
-
 }

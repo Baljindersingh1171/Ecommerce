@@ -18,14 +18,15 @@ export default function Addtocart() {
   const badge = useContext(CartBadgeContext);
   const [product, setproduct] = useState("");
   const location = useLocation();
-  const { productid, category } = location.state || {};
+  console.log("location.state", location.state);
+  const productid = location.state || {};
   const [isLoading, setIsLoading] = useState(true);
   const [currentid, setCurrentId] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const display = async () => {
-      console.log("productid", productid);
+      console.log("productId", productid);
       const result = await getProduct(productid);
       console.log("getproduct", result.data);
       setproduct(result.data);
