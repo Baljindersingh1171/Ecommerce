@@ -4,7 +4,7 @@ import Productcard from "./Productcard";
 import { useContext } from "react";
 import { Filterdatacontext } from "../Context/FilteredData";
 import { SearchedProductContext } from "../Context/SearchedProduct";
-export default function Getbycategory({ category, isChecked }) {
+export default function Getbycategory({ category, radiovalue}) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const Data = useContext(Filterdatacontext);
@@ -12,17 +12,34 @@ export default function Getbycategory({ category, isChecked }) {
   console.log("filtered data in category", filteredData);
   const input = useContext(SearchedProductContext);
 
-  console.log("ischecked", isChecked);
+ 
 
-  useEffect(() => {
-    if (isChecked) {
-      setData((prevData) => [...prevData].sort((a, b) => a.price - b.price));
-      console.log("Sorting applied");
-    } else {
-      setData(data);
-      console.log("Resetting data");
-    }
-  }, [isChecked]);
+  // useEffect(() => {
+  //   if (isChecked) {
+  //     setData((prevData) => [...prevData].sort((a, b) => a.price - b.price));
+  //     console.log("Sorting applied");
+  //   } else {
+  //     setData(data);
+  //     console.log("Resetting data");
+  //   }
+  // }, [isChecked]);
+  useEffect(()=>{
+ 
+    if(radiovalue==="hightolow")
+      {
+        console.log("high to low")
+        setData((prevData) => [...prevData].sort((a, b) => b.price - a.price));
+
+      }
+      else if(radiovalue==="lowtohigh"){
+        setData((prevData) => [...prevData].sort((a, b) => a.price - b.price));
+      }
+      else{
+        setData(data);
+
+      }
+
+  },[radiovalue])
 
   useEffect(() => {
     const display = async () => {

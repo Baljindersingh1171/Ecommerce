@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Filterdatacontext } from "../Context/FilteredData";
 import { SearchedProductContext } from "../Context/SearchedProduct";
 
-export default function Products() {
+export default function Products({handleClick}) {
   const input = useContext(SearchedProductContext);
   const data = useContext(Filterdatacontext);
   const filteredData = data.filteredData;
@@ -27,7 +27,7 @@ export default function Products() {
     }
   } else {
     return (
-      <div className="flex  justify-center items-center flex-wrap gap-[30px] ml-[100px] mt-[100px]">
+      <div className="flex  justify-center items-center flex-wrap gap-[30px] ml-[100px] mt-[100px]" onClick={handleClick}>
         {filteredData.map((product) => (
           <Productcard
             productid={product.id}

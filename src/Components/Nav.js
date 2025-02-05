@@ -10,12 +10,13 @@ import { FaFilter } from "react-icons/fa";
 import Home from "./Home";
 
 import { getProducts } from "../apis/apis";
+import Buttons from "./Buttons";
 
-export default function Nav({ isChecked, setIsChecked }) {
+export default function Nav({ isVisible,setIsVisible,radiovalue,setRadioValue }) {
   const navigate = useNavigate();
   const badge = useContext(CartBadgeContext);
   const cartBadge = badge.cartBadge;
-  const [isVisible, setIsVisible] = useState(false);
+console.log("isVisible",isVisible);
   const data = useContext(Filterdatacontext);
   const filteredData = data.filteredData;
   console.log("filtered data", filteredData);
@@ -56,24 +57,44 @@ export default function Nav({ isChecked, setIsChecked }) {
     if (isVisible) {
       setIsVisible(false);
     } else {
-      console.log("else condition");
+    
       setIsVisible(true);
     }
   };
-  const handleCheckBoxChange = () => {
-    if (isChecked) {
-      getAllProducts();
-      setIsChecked(false);
-    } else {
-      data.setFilteredData(filteredData.sort((a, b) => a.price - b.price));
-      setIsChecked(true);
+  console.log("radiovalue",radiovalue)
+  const check = () => {
+    if (radiovalue === "hightolow") {
+      console.log("high to low")
+      const sortedData = [...filteredData].sort((a, b) => b.price - a.price); 
+      data.setFilteredData(sortedData);
     }
-    console.log("changed");
-  };
-  console.log("filtered data after sorting", filteredData);
+    else if (radiovalue === "lowtohigh") {
+      console.log("running")
+      const sortedData = [...filteredData].sort((a, b) => a.price - b.price); 
+      data.setFilteredData(sortedData);
+    }
+    else {
+      getAllProducts();
+    }
+}
+
+  useEffect(()=>{check()},[radiovalue])
+
+  const handleRadioBtnChange = (e) => {
+    setRadioValue(e.target.value);
+ 
+     
+    }
+    const handleClear=()=>{
+      setRadioValue(null);
+      getAllProducts();
+      setIsVisible(false);
+
+    }
+
   return (
-    <div className="flex items-center justify-between px-6 bg-black h-[10vh] fixed top-0 right-0 left-0 z-50">
-      <div className="flex gap-[30px] justify-center text-xl cursor-pointer">
+    <div className="flex items-center justify-between px-6 bg-black h-[10vh] fixed top-0 right-0 left-0 z-50" >
+      <div className="flex gap-[30px] justify-center text-xl cursor-pointer" >
         <Link className="text-white" to="/Home">
           Home
         </Link>
@@ -101,21 +122,39 @@ export default function Nav({ isChecked, setIsChecked }) {
             onClick={handleFilterClick}
           />
           {isVisible && (
-            <div className="absolute top-5 right-0 h-[200px] w-[200px] bg-white">
-              <div className="flex items-center gap-[30px] m-[10px]">
-                <p>Price:Low to High</p>
+            <div className="absolute top-5 right-0 h-[120px] w-[200px] bg-white border-[1px] border-black flex flex-col items-center ">
+              <div className="flex items-center gap-[15px] m-[10px] ">
+                <p>Price:-Low to High</p>
                 <input
-                  type="checkbox"
-                  onChange={handleCheckBoxChange}
-                  checked={isChecked}
+                  type="radio"
+                  onChange={handleRadioBtnChange}
+                  name="radiobtn"
+                  value="lowtohigh"
+                  checked={radiovalue === "lowtohigh"} 
+               
                 />
+             
               </div>
+              <div className="flex items-center gap-[15px] m-[10px] ">
+              <p>Price:-High to Low</p>
+              <input
+                type="radio"
+                onChange={handleRadioBtnChange}
+                name="radiobtn"
+                value="hightolow"
+                checked={radiovalue === "hightolow"} 
+             
+              />
+           
+            </div>
+            <Buttons text="clear all" onClick={handleClear} />
+            
             </div>
           )}
         </div>
         <Link className="cursor-pointer relative" to="/Cart">
           <img src={cart} alt="cart" class="h-[45px]" />
-          <span class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold rounded-full h-[20px] w-[20px] flex items-center justify-center">
+          <span class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold rounded-full h-[20px] w-[20px] flex items-center justify-center ">
             {cartBadge}
           </span>
         </Link>

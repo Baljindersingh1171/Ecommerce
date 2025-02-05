@@ -22,7 +22,8 @@ function App() {
   const electronicsCategory = "electronics";
   const JeweleriesCategory = "jewelery";
   const badge = useContext(CartBadgeContext);
-  const [isChecked, setIsChecked] = useState(false);
+  const [radiovalue, setRadioValue] = useState(null);
+    const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     const display = async () => {
       const result = await getCartProducts();
@@ -34,12 +35,15 @@ function App() {
     };
     display();
   }, []);
+  const handleClick=()=>{
+    setIsVisible(false);
+  }
 
   return (
-    <div>
+    <div >
       <BrowserRouter>
         <Routes>
-          <Route path="/Home" element={<Home />} />
+          <Route path="/Home" element={<Home handleClick={handleClick} />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -50,8 +54,8 @@ function App() {
             element={
               <Getbycategory
                 category={mensClothCategory}
-                isChecked={isChecked}
-                setIsChecked={setIsChecked}
+                radiovalue={radiovalue}
+                // setIsChecked={setIsChecked}
               />
             }
           />
@@ -60,8 +64,8 @@ function App() {
             element={
               <Getbycategory
                 category={womenCLothCategory}
-                isChecked={isChecked}
-                setIsChecked={setIsChecked}
+                radiovalue={radiovalue}
+               
               />
             }
           />
@@ -70,8 +74,8 @@ function App() {
             element={
               <Getbycategory
                 category={electronicsCategory}
-                isChecked={isChecked}
-                setIsChecked={setIsChecked}
+                radiovalue={radiovalue}
+             
               />
             }
           />
@@ -80,14 +84,14 @@ function App() {
             element={
               <Getbycategory
                 category={JeweleriesCategory}
-                isChecked={isChecked}
-                setIsChecked={setIsChecked}
+                radiovalue={radiovalue}
+               
               />
             }
           />
           <Route path="/Cart" element={<Cart />} />
         </Routes>
-        <Nav isChecked={isChecked} setIsChecked={setIsChecked} />
+        <Nav    radiovalue={radiovalue} setRadioValue={setRadioValue} isVisible={isVisible} setIsVisible={setIsVisible} />
       </BrowserRouter>
 
       <ToastContainer position="top-center" />

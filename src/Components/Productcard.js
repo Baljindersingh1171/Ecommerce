@@ -36,7 +36,7 @@ export default function Product({
             className="bg-[#fbbf24] p-2 rounded-md w-[150px]  "
             text="CHECK OUT"
             onClick={() =>
-              navigate("/Addtocart", { state: { productid, category } })
+              navigate("/Addtocart", { state:  productid })
             }
           />
         </div>
